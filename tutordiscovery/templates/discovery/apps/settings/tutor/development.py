@@ -2,6 +2,12 @@ from ..devstack import *
 
 {% include "discovery/apps/settings/partials/common.py" %}
 
+CORS_ORIGIN_WHITELIST = list(CORS_ORIGIN_WHITELIST) + [
+    "http://{{ MFE_HOST }}:{{ ECOMMERCE_MFE_APP['port'] }}",
+    "http://{{ MFE_HOST }}:{{ ECOMMERCE_PAYMENT_MFE_APP['port'] }}",
+]
+CSRF_TRUSTED_ORIGINS = ["{{ MFE_HOST }}:{{ ECOMMERCE_MFE_APP['port'] }}"]
+
 BACKEND_SERVICE_EDX_OAUTH2_KEY = "{{ DISCOVERY_OAUTH2_KEY_DEV }}"
 BACKEND_SERVICE_EDX_OAUTH2_SECRET = "{{ DISCOVERY_OAUTH2_SECRET }}"
 BACKEND_SERVICE_EDX_OAUTH2_PROVIDER_URL = "http://lms:8000/oauth2"
