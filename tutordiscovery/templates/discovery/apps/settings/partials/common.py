@@ -5,6 +5,9 @@ ALLOWED_HOSTS = [
 ]
 
 PLATFORM_NAME = "{{ PLATFORM_NAME }}"
+PROTOCOL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}"
+
+CORS_ALLOW_CREDENTIALS = True
 
 DATABASES = {
     "default": {
