@@ -2,6 +2,11 @@ from ..production import *
 
 {% include "discovery/apps/settings/partials/common.py" %}
 
+CORS_ORIGIN_WHITELIST = list(CORS_ORIGIN_WHITELIST) + [
+    "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ MFE_HOST }}",
+]
+CSRF_TRUSTED_ORIGINS = ["{{ MFE_HOST }}"]
+
 BACKEND_SERVICE_EDX_OAUTH2_KEY = "{{ DISCOVERY_OAUTH2_KEY }}"
 BACKEND_SERVICE_EDX_OAUTH2_SECRET = "{{ DISCOVERY_OAUTH2_SECRET }}"
 BACKEND_SERVICE_EDX_OAUTH2_PROVIDER_URL = "http://lms:8000/oauth2"
